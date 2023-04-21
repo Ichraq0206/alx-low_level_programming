@@ -1,15 +1,23 @@
-#include "function_pointers.h"
-#include <stdio.h>
-/**
- * print_name - print name using pointer to function
- * @name: string to add
- * @f: pointer to function
- * Return: nothing
- **/
-void print_name(char *name, void (*f)(char *))
-{
-	if (name == NULL || f == NULL)
-		return;
+#include "variadic_functions.h"
 
-	f(name);
+/**
+ * sum_them_all - calculates the sum of all its parameters
+ * @n: number of arguments passed to the function
+ *
+ * Return: the resulting sum
+ */
+int sum_them_all(const unsigned int n, ...)
+{
+	unsigned int i;
+	int sum = 0;
+	va_list list;
+
+	va_start(list, n);
+
+	for (i = 0; i < n; i++)
+		sum += va_arg(list, int);
+
+	va_end(list);
+
+	return (sum);
 }
